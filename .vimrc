@@ -1,13 +1,5 @@
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2008 Dec 17
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
+" Philip: ensure that pathogen is loaded first
+execute pathogen#infect()
 
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
@@ -94,3 +86,7 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
 		  \ | wincmd p | diffthis
 endif
+
+" Philip's Settings:
+set t_Co=256
+set relativenumber

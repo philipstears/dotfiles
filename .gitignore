@@ -1,0 +1,16 @@
+# Nabbed from Rob Ashton's GitHub
+*
+!.vim
+!.vim/
+!.vim/*/
+!.vim/*/*
+!.vim/*/*/*
+!.vim/*/*/*/*
+!.vim/*/*/*/*/*
+# If anybody can fix my aboves...
+
+!.vimrc
+!.gvimrc
+.DS_Store
+!.gitignore
+!.gitattributes
