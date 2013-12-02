@@ -1,1 +1,1 @@
-git clone https://github.com/kien/ctrlp.vim ~/.vim/bundle/ctrlp
+git clone https://github.com/kien/ctrlp.vim %USERPROFILE%\.vim\bundle\ctrlp
