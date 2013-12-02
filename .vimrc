@@ -96,3 +96,11 @@ endif
 " Philip's Settings:
 set t_Co=256
 set relativenumber
+
+set autochdir
+:cd $HOME
+
+set guifont=Segoe_UI_Mono:h10:cANSI
+colorscheme slate
+set guioptions-=T " No toolbar
+set guioptions-=t " No tear-off menus
