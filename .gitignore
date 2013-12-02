@@ -14,3 +14,4 @@
 .DS_Store
 !.gitignore
 !.gitattributes
+!get-vim-plugins.cmd
