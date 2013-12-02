@@ -100,7 +100,7 @@ set relativenumber
 set autochdir
 :cd $HOME
 
-set guifont=Segoe_UI_Mono:h10:cANSI
-colorscheme slate
+set guifont=Lucida_Console:h11:cANSI
 set guioptions-=T " No toolbar
 set guioptions-=t " No tear-off menus
+colorscheme slate
