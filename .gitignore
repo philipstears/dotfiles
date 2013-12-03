@@ -1,4 +1,4 @@
-# Nabbed from Rob Ashton's GitHub
+# Based on Rob Ashton's dotfiles on GitHub
 *
 !.vim
 !.vim/
@@ -7,11 +7,12 @@
 !.vim/*/*/*
 !.vim/*/*/*/*
 !.vim/*/*/*/*/*
-# If anybody can fix my aboves...
 
 !.vimrc
 !.gvimrc
-.DS_Store
 !.gitignore
 !.gitattributes
 !get-vim-plugins.cmd
+
+# Mac Crap
+.DS_Store
