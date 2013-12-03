@@ -96,8 +96,9 @@ endif
 " Philip's Settings:
 set t_Co=256
 set relativenumber
+set tabstop=4
 
-set autochdir
+" set autochdir
 :cd $HOME
 
 set guifont=Lucida_Console:h11:cANSI
