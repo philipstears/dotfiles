@@ -103,4 +103,4 @@ set autochdir
 set guifont=Lucida_Console:h11:cANSI
 set guioptions-=T " No toolbar
 set guioptions-=t " No tear-off menus
-colorscheme slate
+colorscheme railscasts 
