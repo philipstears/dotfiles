@@ -94,9 +94,13 @@ if !exists(":DiffOrig")
 endif
 
 " Philip's Settings:
+set tw=0
 set t_Co=256
 set relativenumber
 set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set noexpandtab
 
 " set autochdir
 :cd $HOME

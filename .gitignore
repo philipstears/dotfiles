@@ -16,3 +16,7 @@
 
 # Mac Crap
 .DS_Store
+
+# vim files
+*.*~
+*.swp
