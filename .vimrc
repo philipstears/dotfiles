@@ -22,7 +22,10 @@ set backspace=indent,eol,start
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
 else
-  set backup		" keep a backup file
+	" Philip - I don't want backup files hanging about littering
+	" my workspace
+	set nobackup
+	set writebackup
 endif
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
