@@ -13,6 +13,7 @@
 !.gitignore
 !.gitattributes
 !get-vim-plugins.cmd
+!init.js
 
 # Mac Crap
 .DS_Store
