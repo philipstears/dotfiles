@@ -18,14 +18,16 @@ function runNext() {
 	var proc = spawn("git", ["clone", repo, repoDir]);
 
 	proc.stdout.on("data", function(data) {
-		console.log(data);
+		console.log(data.toString("utf8"));
 	});
 
 	proc.stderr.on("data", function(data) {
-		console.log(data);
+		console.log(data.toString("utf8"));
 	});
 
 	proc.on("exit", function() {
 		runNext();
 	});
 }
+
+runNext();
