@@ -112,7 +112,6 @@ set guifont=Lucida_Console:h11:cANSI
 set guioptions-=T " No toolbar
 set guioptions-=t " No tear-off menus
 colorscheme railscasts
-colorscheme mango
 
  " automatically open and close the popup menu / preview window
  au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
