@@ -3,6 +3,7 @@ var repos = [
 	"https://github.com/goatslacker/mango.vim",
 	"https://github.com/ahayman/vim-nodejs-complete",
 	"https://github.com/tpope/vim-surround",
+	"https://github.com/jelera/vim-javascript-syntax",
 ];
 
 var spawn = require("child_process").spawn;
