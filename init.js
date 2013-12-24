@@ -1,5 +1,6 @@
 var repos = [
-	"https://github.com/kien/ctrlp.vim"
+	"https://github.com/kien/ctrlp.vim",
+	"https://github.com/goatslacker/mango.vim"
 ];
 
 var spawn = require("child_process").spawn;
