@@ -6,6 +6,7 @@ var repos = [
 	"https://github.com/jelera/vim-javascript-syntax",
 	"https://github.com/leafgarland/typescript-vim",
 	"https://github.com/jgdavey/vim-railscasts",
+	"https://github.com/groenewege/vim-less",
 ];
 
 var spawn = require("child_process").spawn;
