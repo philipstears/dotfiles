@@ -108,7 +108,6 @@ set noexpandtab
 " set autochdir
 :cd $PWD
 
-set guifont=Lucida_Console:h11:cANSI
 set guioptions-=T " No toolbar
 set guioptions-=t " No tear-off menus
 colorscheme railscasts
@@ -121,3 +120,18 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
+inoremap <C-Space> <C-x><C-o>
+inoremap <C-@> <C-x><C-o> 
+
+noremap <C-w><C-n> :vnew<cr>
+
+if has("gui_running")
+  if has("gui_gtk2")
+    set guifont=Droid\ Sans\ Mono\ 12
+  elseif has("gui_macvim")
+    set guifont=Menlo\ Regular:h14
+  elseif has("gui_win32")
+    set guifont=Consolas:h11:cANSI
+  endif
+endif
