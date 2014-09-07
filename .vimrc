@@ -5,7 +5,8 @@ if has('win32') || has('win64')
 endif
 
 " Philip: ensure that pathogen is loaded first
-execute pathogen#infect()
+call pathogen#infect()
+call pathogen#helptags()
 
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"

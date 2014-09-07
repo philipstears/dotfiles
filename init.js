@@ -8,6 +8,7 @@ var repos = [
 	"https://github.com/jgdavey/vim-railscasts",
 	"https://github.com/groenewege/vim-less",
 	"https://github.com/clausreinke/typescript-tools",
+    "https://github.com/jimenezrick/vimerl",
 ];
 
 var spawn = require("child_process").spawn;
