@@ -106,8 +106,15 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 
-" set autochdir
-:cd $PWD
+" Change to the current working directory if possible, or on Windows, the user 
+" profile dir as a fallback
+if !empty($pwd)
+	cd $pwd
+elseif !empty($home)
+	cd $home
+elseif !empty($userprofile)
+	cd $userprofile
+endif
 
 set guioptions-=T " No toolbar
 set guioptions-=t " No tear-off menus
