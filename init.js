@@ -9,6 +9,10 @@ var repos = [
     "https://github.com/groenewege/vim-less",
     "https://github.com/clausreinke/typescript-tools",
     "https://github.com/jimenezrick/vimerl",
+    "https://github.com/scrooloose/syntastic",
+    "https://github.com/scrooloose/nerdtree",
+    "https://github.com/Lokaltog/vim-powerline",
+    "https://github.com/othree/html5.vim",
 ];
 
 var spawn = require("child_process").spawn;
