@@ -13,6 +13,7 @@ var repos = [
     "https://github.com/scrooloose/nerdtree",
     "https://github.com/Lokaltog/vim-powerline",
     "https://github.com/othree/html5.vim",
+    "https://github.com/tpope/vim-fugitive",
 ];
 
 var spawn = require("child_process").spawn;
