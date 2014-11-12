@@ -126,6 +126,10 @@ colorscheme railscasts
  " automatically open and close the popup menu / preview window
  au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
+ " Display-line based nav
+nmap j gj
+nmap k gk
+
  " Disable arrow keys
 noremap <Up> <NOP>
 noremap <Down> <NOP>
