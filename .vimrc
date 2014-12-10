@@ -150,3 +150,6 @@ if has("gui_running")
     set guifont=Consolas:h11:cANSI
   endif
 endif
+
+" Exclude certain file types from fuzzy matching
+set wildignore+=*.o,*.d,*.bin,*.elf,*.sys,*.BIN,*.ELF,*.SYS,*.img,*.IMG
