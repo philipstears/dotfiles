@@ -4,6 +4,11 @@ if has('win32') || has('win64')
   set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 endif
 
+" SWP files don't belong where I'm editing goshdarnit
+if has('unix')
+  set dir=~/tmp
+endif
+
 " Philip: we always want a status line
 set laststatus=2
 
@@ -104,9 +109,9 @@ endif
 set tw=0
 set t_Co=256
 set relativenumber
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set expandtab
 
 " Change to the current working directory if possible, or on Windows, the user 
@@ -140,6 +145,7 @@ inoremap <C-Space> <C-x><C-o>
 inoremap <C-@> <C-x><C-o> 
 
 noremap <C-w><C-n> :vnew<cr>
+noremap <C-n> :NERDTree<cr>
 
 if has("gui_running")
   if has("gui_gtk2")
@@ -153,3 +159,6 @@ endif
 
 " Exclude certain file types from fuzzy matching
 set wildignore+=*.o,*.d,*.bin,*.elf,*.sys,*.BIN,*.ELF,*.SYS,*.img,*.IMG
+
+" Down with trailing whitespace!
+autocmd BufWritePre * :%s/\s\+$//e
