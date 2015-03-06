@@ -1,0 +1,1 @@
+find ./ -name *.hrl -o -name *.erl | ctags -L-
