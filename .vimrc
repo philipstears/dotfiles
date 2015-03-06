@@ -114,7 +114,7 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 
-" Change to the current working directory if possible, or on Windows, the user 
+" Change to the current working directory if possible, or on Windows, the user
 " profile dir as a fallback
 if !empty($pwd)
 	cd $pwd
@@ -142,7 +142,7 @@ noremap <Left> <NOP>
 noremap <Right> <NOP>
 
 inoremap <C-Space> <C-x><C-o>
-inoremap <C-@> <C-x><C-o> 
+inoremap <C-@> <C-x><C-o>
 
 noremap <C-w><C-n> :vnew<cr>
 noremap <C-n> :NERDTree<cr>
@@ -158,7 +158,7 @@ if has("gui_running")
 endif
 
 " Exclude certain file types from fuzzy matching
-set wildignore+=*.o,*.d,*.bin,*.elf,*.sys,*.BIN,*.ELF,*.SYS,*.img,*.IMG
+set wildignore+=*.o,*.d,*.bin,*.elf,*.sys,*.BIN,*.ELF,*.SYS,*.img,*.IMG,*.beam
 
 " Down with trailing whitespace!
 autocmd BufWritePre * :%s/\s\+$//e
