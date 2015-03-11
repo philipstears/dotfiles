@@ -1,3 +1,7 @@
+" UTF-8 is always a better bet (especially with things like NERDTree on remote
+" shells)
+set encoding=utf-8
+
 " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
 " across (heterogeneous) systems easier.
 if has('win32') || has('win64')
@@ -113,6 +117,13 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
+
+" Buffer redraws (helps with things like relative line numbers, and just
+" generally on remote shells)
+set lazyredraw
+
+" Stop ctrl-p from re-indexing across new instances of vim
+let g:ctrlp_clear_cache_on_exit = 0
 
 " Change to the current working directory if possible, or on Windows, the user
 " profile dir as a fallback
