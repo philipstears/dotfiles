@@ -18,6 +18,7 @@ var repos = [
     "https://github.com/wavded/vim-stylus",
     "https://github.com/mxw/vim-jsx.git",
     "https://github.com/rking/ag.vim",
+    "https://github.com/cespare/vim-toml",
 ];
 
 var spawn = require("child_process").spawn;
