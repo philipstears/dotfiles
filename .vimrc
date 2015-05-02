@@ -168,6 +168,9 @@ if has("gui_running")
   endif
 endif
 
+" Show autocompletion alternatives for ex commands
+set wildmenu
+
 " Exclude certain file types from fuzzy matching
 set wildignore+=*.o,*.d,*.bin,*.elf,*.sys,*.BIN,*.ELF,*.SYS,*.img,*.IMG,*.beam
 
