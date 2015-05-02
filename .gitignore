@@ -1,23 +1,9 @@
-# Based on Rob Ashton's dotfiles on GitHub
+# Just ignore everything - I'll force
+# add anything I want
 *
-!.vim
-!.vim/
-!.vim/*/
-!.vim/*/*
-!.vim/*/*/*
-!.vim/*/*/*/*
-!.vim/*/*/*/*/*
-
 !.vimrc
 !.gvimrc
+!.nvimrc
 !.gitignore
 !.gitattributes
-!get-vim-plugins.cmd
 !init.js
-
-# Mac Crap
-.DS_Store
-
-# vim files
-*.*~
-*.swp
