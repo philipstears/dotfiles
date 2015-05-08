@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+base_image=stears-dev-image
+
+# Host Variables
+project_dir=$PWD
+project_dir_name=${PWD##*/}
+src_dir=$PWD/..
+vir_dir=$HOME/.vir
+
+# Container Variables
+user_name=id3as
+
+docker run -ti \
+           --expose=all \
+           --rm \
+           -u $user_name \
+           -e HOME=/home/$user_name \
+           -w /home/$user_name \
+           -v $src_dir:/home/$user_name/src \
+           -v /:/host \
+           -v $vir_dir:/home/$user_name/.vir \
+           $base_image \
+           bash -c "cd /home/$user_name/src/$project_dir_name; PATH=\$PATH:/home/$user_name/.vir; bash -c '[ -f env.sh ] && source env.sh; bash -l'"
