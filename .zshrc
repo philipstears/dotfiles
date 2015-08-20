@@ -48,6 +48,8 @@ DISABLE_AUTO_TITLE="true"
 plugins=(git)
 
 # User configuration
+SHARE_HISTORY="false"
+INC_APPEND_HISTORY="true"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -64,6 +66,7 @@ alias egrep='egrep --color=auto'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias evil='emacs -nw'
 
 # Stears: NOX stuff
 export PATH="$HOME/opt/cross/bin:$PATH"
@@ -89,3 +92,6 @@ alias ohmy=fuck
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
