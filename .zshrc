@@ -78,6 +78,7 @@ export PATH="$PATH:$HOME/opt/bin"
 
 # Stears: npm
 export PATH="$PATH:$HOME/npm/bin"
+export NODE_PATH="$NODE_PATH:/home/stears/npm/lib/node_modules"
 
 # Stears: gimme Haskell!
 export PATH=~/.cabal/bin:/opt/cabal/1.20/bin:/opt/ghc/7.8.4/bin:$PATH
@@ -88,6 +89,9 @@ alias vi=nvim
 
 alias fuck='eval $(thefuck $(fc -ln -1))'
 alias ohmy=fuck
+
+# Stears: zsh sets LESS to "-R", I prefer git's FRX style
+export LESS="FRX"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
