@@ -36,6 +36,9 @@
      haskell
      themes-megapack
      fsharp
+     csharp
+     typescript
+     stupid-indent-mode
      )
    ;; List of additional packages that will be installed wihout being
    ;; wrapped in a layer. If you need some configuration for these

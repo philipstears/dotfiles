@@ -6,18 +6,69 @@ project_dir=$PWD
 project_dir_name=${PWD##*/}
 src_dir=$PWD/..
 vir_dir=$HOME/.vir
+PWD=$(pwd)
+DIR=/host
 
 # Container Variables
 user_name=id3as
 
+while getopts ":d:v:n:l:e:p:z:" option; do
+    case "$option" in
+        n)
+            NAME=$OPTARG
+            ;;
+        l)
+            LINKS="$LINKS --link=$OPTARG "
+            ;;
+        e)
+            EXPOSE="$EXPOSE --expose=$OPTARG"
+            ;;
+        v)
+            VOLUME="$VOLUME --volume=$OPTARG"
+            ;;
+        d)
+            DIR="$OPTARG"
+            ;;
+        p)
+            PUBLISH="$PUBLISH --publish=$OPTARG"
+            ;;
+        z)
+            ENVVARS="$ENVVARS -e $OPTARG"
+            ;;
+        ?)
+        echo "Error: unknown option -$OPTARG"
+        exit 1
+        ;;
+    esac
+done
+
+shift $(($OPTIND - 1))
+ARGS=$@
+FLATTENED=${ARGS[@]}
+
+echo $FLATTENED
+
+THIS_HOST_DOCKER_IP=$(ip -f inet -o addr show dev docker0|cut -d\  -f 7| cut -d/ -f 1)
+
+echo "Adding host entry for whiplash.local, mapped to $THIS_HOST_DOCKER_IP"
+
 docker run -ti \
-           --expose=all \
            --rm \
+           --name=$NAME \
+           --add-host=whiplash.local:$THIS_HOST_DOCKER_IP \
+           $ENVVARS \
+           $LINKS \
+           $EXPOSE \
+           $PUBLISH \
+           $VOLUME \
            -u $user_name \
            -e HOME=/home/$user_name \
            -w /home/$user_name \
-           -v $src_dir:/home/$user_name/src \
-           -v /:/host \
+           -v $PWD:/host \
            -v $vir_dir:/home/$user_name/.vir \
+           -v /var/run/docker.sock:/var/run/docker.sock \
            $base_image \
-           bash -c "cd /home/$user_name/src/$project_dir_name; PATH=\$PATH:/home/$user_name/.vir; bash -c '[ -f env.sh ] && source env.sh; bash -l'"
+           bash -c "cd /host; PATH=\$PATH:/home/$user_name/.vir; bash -c \"cd $DIR && [ -f env.sh ] && source env.sh; $FLATTENED\""
+
+#           -v /dev/dsp:/dev/dsp \
+#           --privileged \

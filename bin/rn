@@ -1,3 +1,1 @@
-#!/bin/sh 
-
-sudo service network-manager restart
+/usr/bin/super

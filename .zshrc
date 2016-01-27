@@ -83,6 +83,9 @@ export NODE_PATH="$NODE_PATH:/home/stears/npm/lib/node_modules"
 # Stears: gimme Haskell!
 export PATH=~/.cabal/bin:/opt/cabal/1.20/bin:/opt/ghc/7.8.4/bin:$PATH
 
+# Stears: ruby
+source /home/stears/.rvm/scripts/rvm
+
 # Stears: time to try nvim properly
 alias vim=nvim
 alias vi=nvim
@@ -99,3 +102,7 @@ export LESS="FRX"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+PATH=$PATH:/home/stears/010editor;export PATH; # ADDED BY INSTALLER - DO NOT EDIT OR DELETE THIS COMMENT - 87FF8EFC-483D-BCAA-D67D-735CF60410D1 6B4D39B2-404B-FF74-1CCA-2F5960ED10B8
