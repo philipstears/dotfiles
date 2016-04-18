@@ -1,8 +1,0 @@
-# Just ignore everything - I'll force
-# add anything I want
-*
-!.vimrc
-!.gvimrc
-!.nvimrc
-!.gitignore
-!.gitattributes
