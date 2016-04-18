@@ -5,17 +5,17 @@ cd "$(dirname "${BASH_SOURCE[${#BASH_SOURCE[@]} - 1]}")"
 source ../include/utils
 
 main() {
-	info
+  info
 
-	ensure_root
-	install_base
+  ensure_root
+  install_base
 }
 
 install_base() {
-	install_packages epel-release
-	install_packages stow htop tree tcpdump iftop awscli
-	install_packages install libtool autoconf automake cmake gcc gcc-c++ make pkgconfig unzip
-	install_packages sl
+  install_packages epel-release
+  install_packages stow htop tree tcpdump iftop awscli
+  install_packages install libtool autoconf automake cmake gcc gcc-c++ make pkgconfig unzip
+  install_packages sl
 }
 
 main

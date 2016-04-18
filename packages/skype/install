@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+
+declare PROG_NAME=$0
+declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
+source $DIR/../../include/utils
+
+main() {
+  if [[ $UID -eq 0 ]]; then
+    install
+  else
+    sudo $PROG_NAME
+  fi
+}
+
+install() {
+  if [[ -f /usr/bin/skype ]]; then
+    return
+  fi
+
+  yum localinstall http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
+
+  yum localinstall -y http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-1.el7.nux.noarch.rpm
+
+  yum clean all
+
+  yum install \
+    alsa-lib.i686 \
+    libXv.i686 \
+    libXScrnSaver.i686 \
+    libcanberra.i686 \
+    libcanberra-gtk2.i686 \
+    pulseaudio-libs.i686 \
+    alsa-plugins-pulseaudio.i686 \
+    qt-4.8.5-8.el7.i686 \
+    qtwebkit-2.3.3-3.el7.i686
+
+  cd /tmp
+
+  curl -Llsso skype-4.3.0.37-fedora.i586.rpm http://download.skype.com/linux/skype-4.3.0.37-fedora.i586.rpm
+
+  rpm -i skype-4.3.0.37-fedora.i586.rpm
+}
+
+main
