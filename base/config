@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+cd "$(dirname "${BASH_SOURCE[${#BASH_SOURCE[@]} - 1]}")"
+
+source ../include/utils
+
+main() {
+	configure_git
+}
+
+configure_git() {
+	if [[ "$USER" == "stears" ]]; then
+		echo "Configuring git because the current username is 'stears'"
+		git config --global user.name "Philip Stears"
+		git config --global user.email "philip@philipstears.com"
+	else
+		echo "Not configuring git because the current username isn't 'stears'"
+	fi
+}
+
+main

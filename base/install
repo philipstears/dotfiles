@@ -2,46 +2,20 @@
 set -eu -o pipefail
 cd "$(dirname "${BASH_SOURCE[${#BASH_SOURCE[@]} - 1]}")"
 
-declare NEED_SUDO=
-declare PACKAGE_INSTALL_CMD=
-
-source ./utils
+source ../include/utils
 
 main() {
-  info
-  determine_package_manager
-  install_base
-}
+	info
 
-determine_package_manager() {
-  echo "Determining package manager to use..."
-
-  if yum --version 2&>/dev/null; then
-    PACKAGE_INSTALL_CMD="yum install -y"
-    echo "yum detected."
-  elif apt --version 2&>/dev/null; then
-    PACKAGE_INSTALL_CMD="apt-get install -y"
-    echo "apt detected."
-  else
-    echo "No supported package manager found."
-  fi
+	ensure_root
+	install_base
 }
 
 install_base() {
-  install_packages stow
+	install_packages epel-release
+	install_packages stow htop tree tcpdump iftop awscli
+	install_packages install libtool autoconf automake cmake gcc gcc-c++ make pkgconfig unzip
+	install_packages sl
 }
-
-install_packages() {
-  local package_spec=${1:-}
-
-  maybe_sudo $PACKAGE_INSTALL_CMD "$package_spec"
-}
-
-maybe_sudo() {
-  local cmd=${1:-}
-
-  sudo $cmd
-}
-
 
 main

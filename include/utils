@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+
+declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
+declare PACKAGE_INSTALL_CMD=
+
+ensure_root() {
+	if [[ $UID -ne 0 ]]; then
+		echo "This script must be run as root, exiting..."
+		exit 1
+	fi
+}
+
+ensure_not_root() {
+	if [[ $UID -eq 0 ]]; then
+		echo "This script must be not be run as root, exiting..."
+		exit 1
+	fi
+}
+
+install_packages() {
+	local package_spec=${*}
+
+	ensure_package_manager
+
+	$PACKAGE_INSTALL_CMD $package_spec
+}
+
+ensure_package_manager() {
+	if [[ -n "$PACKAGE_INSTALL_CMD" ]]; then
+		return
+	fi
+
+	if yum --version 2&>/dev/null; then
+		PACKAGE_INSTALL_CMD="yum install -y"
+		echo "yum package manager detected."
+	elif apt --version 2&>/dev/null; then
+		PACKAGE_INSTALL_CMD="apt-get install -y"
+		echo "apt package manager detected."
+	else
+		echo "no supported package manager found."
+		exit 2
+	fi
+	
+}
+
+info() {
+  echo ${FUNCNAME[0]} in ${BASH_SOURCE[0]} called by ${FUNCNAME[1]} ${BASH_SOURCE[1]}:${BASH_LINENO[0]} }
+}
