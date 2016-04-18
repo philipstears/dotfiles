@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+
+info() {
+  echo ${FUNCNAME[0]} in ${BASH_SOURCE[0]} called by ${FUNCNAME[1]} ${BASH_SOURCE[1]}:${BASH_LINENO[0]}
+}
+
