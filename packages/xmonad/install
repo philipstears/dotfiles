@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+
+declare PROG_NAME=$0
+declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
+source $DIR/../../include/utils
+
+main() {
+  install_packages xmonad-mate mate-screensaver mate-system-monitor mate-themes mate-applets mate-screenshot dmenu
+
+  mkdir -p ~/.xmonad/
+
+  if [[ -e ~/.xmonad/xmonad.hs ]] || [[ -L ~/.xmonad/xmonad.hs ]]; then
+    rm ~/.xmonad/xmonad.hs
+  fi
+
+  ln -s $DIR/xmonad.hs ~/.xmonad/xmonad.hs
+
+  xmonad --recompile
+
+  xmonad --replace
+}
+
+main

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+
+declare PROG_NAME=$0
+declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
+source $DIR/../../include/utils
+
+main() {
+  if command -v google-chrome; then
+    return
+  fi
+
+  cd /tmp
+
+  curl -Llsso /tmp/google-chrome-stable_current_x86-64.rpm https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+
+  install_packages /tmp/google-chrome-stable_current_x86-64.rpm
+}
+
+main

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -eu -o pipefail
 
-declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
-declare PACKAGE_INSTALL_CMD=
+declare INCLUDE_UTILS_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
+declare INCLUDE_UTILS_PACKAGE_INSTALL_CMD=
 
 ensure_root() {
   if [[ $UID -ne 0 ]]; then
@@ -23,25 +23,24 @@ install_packages() {
 
   ensure_package_manager
 
-  $PACKAGE_INSTALL_CMD $package_spec
+  sudo $INCLUDE_UTILS_PACKAGE_INSTALL_CMD $package_spec
 }
 
 ensure_package_manager() {
-  if [[ -n "$PACKAGE_INSTALL_CMD" ]]; then
+  if [[ -n "$INCLUDE_UTILS_PACKAGE_INSTALL_CMD" ]]; then
     return
   fi
 
   if yum --version 2&>/dev/null; then
-    PACKAGE_INSTALL_CMD="yum install -y"
+    INCLUDE_UTILS_PACKAGE_INSTALL_CMD="yum install -y"
     echo "yum package manager detected."
   elif apt --version 2&>/dev/null; then
-    PACKAGE_INSTALL_CMD="apt-get install -y"
+    INCLUDE_UTILS_PACKAGE_INSTALL_CMD="apt-get install -y"
     echo "apt package manager detected."
   else
     echo "no supported package manager found."
     exit 2
   fi
-
 }
 
 info() {

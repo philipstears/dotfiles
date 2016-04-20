@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+
+declare PROG_NAME=$0
+declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
+source $DIR/../../include/utils
+
+main() {
+  if [[ ! -f /etc/yum.repos.d/docker.repo ]]; then
+
+    sudo tee /etc/yum.repos.d/docker.repo <<-'EOF'
+[dockerrepo]
+name=Docker Repository
+baseurl=https://yum.dockerproject.org/repo/main/centos/$releasever/
+enabled=1
+gpgcheck=1
+gpgkey=https://yum.dockerproject.org/gpg
+EOF
+
+  fi
+
+  if ! command -v docker 2&> /dev/null; then
+    install_packages docker-engine
+  fi
+
+  if [[ -n "$(getent group admin)" ]]; then
+    sudo groupadd docker
+  fi
+
+  sudo usermod -aG docker $USER
+
+  sudo systemctl enable docker
+
+  sudo systemctl start docker
+}
+
+main
