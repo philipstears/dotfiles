@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+
+declare PROG_NAME=$0
+declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
+source $DIR/../../include/utils
+
+main() {
+  local usr_src_dir="$HOME/usr/src"
+  local dir="$usr_src_dir/git"
+
+  mkdir -p "$usr_src_dir"
+
+  if [[ ! -d "$dir" ]]; then
+    git clone https://github.com/git/git -b v2.8.0 "$dir"
+  fi
+
+  cd "$dir"
+
+  sudo yum -y install \
+    url-devel \
+    expat-devel \
+    gettext-devel \
+    openssl-devel \
+    perl-devel \
+    zlib-devel \
+    curl-devel
+
+  make
+
+  sudo yum -y remove git
+
+  sudo make install
+}
+
+main
