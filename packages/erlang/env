@@ -1,0 +1,2 @@
+# 18.3 should be activated in all shells by default
+source $HOME/.local/opt/erlang/std-18-3/activate

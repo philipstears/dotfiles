@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+
+declare PROG_NAME=$0
+declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
+source $DIR/../../include/utils
+
+main() {
+  ensure_not_root
+  install_packages
+}
+
+install_packages() {
+  for package_dir in ./packages/*; do
+    local package_installer="$package_dir/install"
+
+    if [[ -x "$package_installer" ]]; then
+      install_package "$package_installer"
+    fi
+  done
+}
+
+install_package() {
+  local package_installer="$1"
+  echo "Installing package with installer '$package_installer'"
+  "$package_installer"
+}
+
+main

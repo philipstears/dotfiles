@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+
+declare PROG_NAME=$0
+declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
+source $DIR/../../include/utils
+
+main() {
+  local vir_dir=$HOME/.vir
+
+  if [[ -d "$vir_dir" ]]; then
+    echo "vir is already installed"
+  else
+    echo "installing vir"
+    git clone https://github.com/robashton/vir.git "$vir_dir"
+  fi
+
+  link_usr_bin "$vir_dir/vir" vir
+}
+
+main

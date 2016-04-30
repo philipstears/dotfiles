@@ -73,7 +73,10 @@ link_usr_bin() {
   local target_path="$1"
   local link_name="$2"
   mkdir -p "$INCLUDE_UTILS_BIN_DIR"
-  ln -s "$target_path" "$INCLUDE_UTILS_BIN_DIR/$link_name"
+
+  if [[ ! -f "$target_path" ]] && [[ ! -L "$target_path" ]]; then
+    ln -s "$target_path" "$INCLUDE_UTILS_BIN_DIR/$link_name"
+  fi
 }
 
 per_user_opt_dir() {
