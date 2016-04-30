@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
+declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")"; pwd)
 
 # NOTE: don't source utils or it'll end up
 #       in the user's shell, which is unlikely
@@ -10,7 +10,7 @@ main() {
 }
 
 source_packages() {
-  for package_dir in ./packages/*; do
+  for package_dir in $DIR/*; do
     local package_env="$package_dir/env"
 
     if [[ -e "$package_env" ]]; then
