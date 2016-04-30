@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+
+declare PROG_NAME=$0
+declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
+source $DIR/../../include/utils
+
+main() {
+  local tmux_config_file=~/.tmux.conf
+
+  install_packages tmux
+
+  if [[ -e "$tmux_config_file" ]] || [[ -L "$tmux_config_file" ]]; then
+    rm "$tmux_config_file"
+  fi
+
+  ln -s $DIR/tmux.conf "$tmux_config_file"
+}
+
+main

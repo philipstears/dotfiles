@@ -3,6 +3,13 @@ set -eu -o pipefail
 
 declare INCLUDE_UTILS_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
 declare INCLUDE_UTILS_PACKAGE_INSTALL_CMD=
+declare INCLUDE_UTILS_PACKAGE_CHECK_CMD=
+
+# Per-user install stuff
+declare INCLUDE_UTILS_USR_DIR="$HOME/.local"
+declare INCLUDE_UTILS_BIN_DIR="$INCLUDE_UTILS_USR_DIR/bin"
+declare INCLUDE_UTILS_SRC_DIR="$INCLUDE_UTILS_USR_DIR/src"
+declare INCLUDE_UTILS_OPT_DIR="$INCLUDE_UTILS_USR_DIR/opt"
 
 ensure_root() {
   if [[ $UID -ne 0 ]]; then
@@ -23,7 +30,21 @@ install_packages() {
 
   ensure_package_manager
 
-  sudo $INCLUDE_UTILS_PACKAGE_INSTALL_CMD $package_spec
+  if ! is_installed $package_spec; then
+    sudo $INCLUDE_UTILS_PACKAGE_INSTALL_CMD $package_spec
+  fi
+}
+
+is_installed() {
+  ensure_package_manager
+
+  for package in $@; do
+    if ! $INCLUDE_UTILS_PACKAGE_CHECK_CMD $package 2&> /dev/null; then
+      return 1
+    fi
+  done
+
+  return 0
 }
 
 ensure_package_manager() {
@@ -31,16 +52,40 @@ ensure_package_manager() {
     return
   fi
 
-  if yum --version 2&>/dev/null; then
+  if is_command_available yum; then
     INCLUDE_UTILS_PACKAGE_INSTALL_CMD="yum install -y"
+    INCLUDE_UTILS_PACKAGE_CHECK_CMD="yum list installed"
     echo "yum package manager detected."
-  elif apt --version 2&>/dev/null; then
+  elif is_command_available apt; then
     INCLUDE_UTILS_PACKAGE_INSTALL_CMD="apt-get install -y"
     echo "apt package manager detected."
   else
     echo "no supported package manager found."
     exit 2
   fi
+}
+
+is_command_available() {
+  command -v $* 2&> /dev/null
+}
+
+link_usr_bin() {
+  local target_path="$1"
+  local link_name="$2"
+  mkdir -p "$INCLUDE_UTILS_BIN_DIR"
+  ln -s "$target_path" "$INCLUDE_UTILS_BIN_DIR/$link_name"
+}
+
+per_user_opt_dir() {
+  echo $INCLUDE_UTILS_OPT_DIR
+}
+
+per_user_bin_dir() {
+  echo $INCLUDE_UTILS_BIN_DIR
+}
+
+per_user_src_dir() {
+  echo $INCLUDE_UTILS_SRC_DIR
 }
 
 info() {
