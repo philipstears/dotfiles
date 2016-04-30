@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+
+declare PROG_NAME=$0
+declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
+source $DIR/../../include/utils
+
+main() {
+  local install_dir=$HOME/.oh-my-zsh
+  local env_file=$DIR/../env
+
+  install_packages zsh
+
+  if [[ ! -d "$install_dir" ]]; then
+    git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "$install_dir"
+    sudo chsh stears -s /bin/zsh
+  fi
+
+  local target_path=$DIR/zshrc
+  local link_path=$HOME/.zshrc
+
+  if [[ ! -f "$link_path" ]] && [[ ! -L "$link_path" ]]; then
+    ln -s "$target_path" "$link_path"
+  fi
+}
+
+main

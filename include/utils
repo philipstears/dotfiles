@@ -72,10 +72,11 @@ is_command_available() {
 link_usr_bin() {
   local target_path="$1"
   local link_name="$2"
+  local link_path="$INCLUDE_UTILS_BIN_DIR/$link_name"
   mkdir -p "$INCLUDE_UTILS_BIN_DIR"
 
-  if [[ ! -f "$target_path" ]] && [[ ! -L "$target_path" ]]; then
-    ln -s "$target_path" "$INCLUDE_UTILS_BIN_DIR/$link_name"
+  if [[ ! -f "$link_path" ]] && [[ ! -L "$link_path" ]]; then
+    ln -s "$target_path" "$link_path"
   fi
 }
 
