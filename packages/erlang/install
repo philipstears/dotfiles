@@ -24,6 +24,8 @@ main() {
   fi
 
   kerl install "$build_name" "$HOME/.local/opt/erlang/$build_name"
+
+  $DIR/base-plt
 }
 
 install_kerl() {

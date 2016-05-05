@@ -1,0 +1,32 @@
+#!/bin/sh
+
+declare active_installation=${_KERL_ACTIVE_DIR##*/}
+declare plt_name=$active_installation-base.plt
+declare plt_base_path=$HOME/plts
+declare plt_path=$plt_base_path/$plt_name
+
+mkdir -p $plt_base_path
+
+echo Build the base PLT for the active install
+if [ -f "$plt_path" ]; then
+  echo "The PLT already exists for installation $active_installation"
+else
+  echo "Building base PLT for installation $active_installation"
+
+  dialyzer \
+    --build_plt \
+    --apps erts kernel stdlib mnesia \
+           compiler crypto hipe edoc gs syntax_tools \
+           inets xmerl ssl runtime_tools public_key \
+           asn1 os_mon sasl eunit snmp \
+    --output_plt $plt_path
+fi
+
+# I don't like this, but too many things depend
+# on it being in a known location
+if test -f "$plt_base_path/base.plt" -o -h "$plt_base_path/base.plt" ; then
+  rm "$plt_base_path/base.plt"
+fi
+
+ln -s "$plt_path" "$plt_base_path/base.plt"
+
