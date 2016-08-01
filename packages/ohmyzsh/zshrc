@@ -50,6 +50,9 @@ INC_APPEND_HISTORY="true"
 
 source $ZSH/oh-my-zsh.sh
 
+# Stears: colors please
+eval "$(dircolors -b)"
+
 # Stears: Hide default user prompt
 DEFAULT_USER=stears
 
