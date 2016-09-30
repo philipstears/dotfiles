@@ -6,9 +6,7 @@ declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
 source $DIR/../../include/utils
 
 main() {
-  sudo add-apt-repository -y ppa:gekkio/xmonad
-  sudo apt update
-  install_packages gnome-session-xmonad
+  install_packages xmonad-mate mate-screensaver mate-system-monitor mate-themes mate-applets mate-screenshot dmenu
 
   mkdir -p ~/.xmonad/
 
@@ -19,6 +17,8 @@ main() {
   ln -s $DIR/xmonad.hs ~/.xmonad/xmonad.hs
 
   xmonad --recompile
+
+  xmonad --replace
 }
 
 main
