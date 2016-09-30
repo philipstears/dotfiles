@@ -10,8 +10,8 @@ import XMonad.Config.Gnome
 main = xmonad $ gnomeConfig
                 { manageHook = manageDocks <+> manageHook gnomeConfig
                 , layoutHook = noBorders $ avoidStruts $ layoutHook gnomeConfig
-                , keys = keys defaultConfig -- Naff off gnome, I want default bindings
-                -- , modMask = mod4Mask
+                , keys = keys def -- Naff off gnome, I want default bindings
+                , modMask = mod4Mask
                 , startupHook = do
 
                     -- Make Java Swing Apps work
