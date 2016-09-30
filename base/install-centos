@@ -12,8 +12,9 @@ main() {
 }
 
 install_base() {
-  install_packages stow htop tree tcpdump iotop iftop awscli tmux gnupg2
-  install_packages libtool autoconf automake cmake gcc g++ make pkg-config unzip
+  install_packages epel-release
+  install_packages stow htop tree tcpdump iftop awscli tmux gpg
+  install_packages libtool autoconf automake cmake gcc gcc-c++ make pkgconfig unzip
   install_packages sl
 }
 
