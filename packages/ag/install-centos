@@ -6,7 +6,7 @@ declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
 source $DIR/../../include/utils
 
 main() {
-  install_packages silversearcher-ag
+  install_packages the_silver_searcher
 }
 
 main
