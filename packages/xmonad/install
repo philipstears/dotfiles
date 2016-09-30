@@ -19,6 +19,12 @@ main() {
   ln -s $DIR/xmonad.hs ~/.xmonad/xmonad.hs
 
   xmonad --recompile
+
+  # The bottom panel can get lost
+  gsettings set org.gnome.gnome-panel.layout toplevel-id-list "['top-panel']"
+
+  # Caps = Control, Alt/Super Swapped
+  gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps', 'altwin:swap_alt_win']"
 }
 
 main
