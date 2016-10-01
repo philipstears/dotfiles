@@ -12,9 +12,15 @@ main() {
 
   cd /tmp
 
-  curl -Llsso /tmp/google-chrome-stable_current_x86-64.rpm https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+  local -r package_name=google-chrome-stable_current_amd64.deb
 
-  install_packages /tmp/google-chrome-stable_current_x86-64.rpm
+  curl -Llsso "$package_name" "https://dl.google.com/linux/direct/$package_name"
+
+  sudo apt install -y libxss1 libappindicator1 libindicator7
+
+  sudo dpkg -i "$package_name"
+
+  sudo apt install -f
 }
 
 main
