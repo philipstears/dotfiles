@@ -58,4 +58,4 @@ DEFAULT_USER=stears
 
 # Stears: source dot files env stuff
 # TODO: Something better than hard coding the path
-source $HOME/dotfiles/packages/env
+source $HOME/data/me/dotfiles/packages/env
