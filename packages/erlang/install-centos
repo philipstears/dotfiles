@@ -19,7 +19,7 @@ main() {
     echo "Erlang 18.3 already built."
   else
     echo "Building Erlang 18.3..."
-    install_packages ncurses-dev
+    install_packages ncurses-devel
     kerl build 18.3 "$build_name"
   fi
 

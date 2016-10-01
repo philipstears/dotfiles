@@ -6,11 +6,17 @@ declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
 source $DIR/../../include/utils
 
 main() {
-  if [[ ! -f /etc/yum.repos.d/fpco.rep ]]; then
-    curl -sSL https://s3.amazonaws.com/download.fpcomplete.com/centos/7/fpco.repo | sudo tee /etc/yum.repos.d/fpco.repo
-  fi
+  sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 575159689BEFB442
 
-  install_packages stack
+  local -r code_name=$(lsb_release -c | awk '{print $2}')
+
+  local -r repository=$(printf 'deb http://download.fpcomplete.com/ubuntu %s main' $code_name)
+
+  echo "$repository" | sudo tee /etc/apt/sources.list.d/fpco.list
+
+  sudo apt update
+
+  sudo apt install -y stack
 }
 
 main
