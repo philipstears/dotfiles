@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+
+declare PROG_NAME=$0
+declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
+source $DIR/../../include/utils
+
+main() {
+  if command -v dropbox; then
+    return
+  fi
+
+  cd /tmp
+
+  local -r package_name=dropbox_2015.10.28_amd64.deb
+
+  curl -Llsso "$package_name" "https://www.dropbox.com/download?dl=packages/ubuntu/$package_name"
+
+  sudo apt install -y python-gtk2
+
+  sudo dpkg -i "$package_name"
+
+  sudo apt install -f
+}
+
+main
