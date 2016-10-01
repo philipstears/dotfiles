@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+
+declare PROG_NAME=$0
+declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
+source $DIR/../../include/utils
+
+main() {
+  local -r install_dir=$INCLUDE_UTILS_OPT_DIR/tor-browser
+
+  if [[ -d "$install_dir" ]]; then
+    return
+  fi
+
+  mkdir -p "$install_dir"
+  cd "$install_dir"
+
+  local -r package_name=tor-browser-linux64-6.0.5_en-US.tar.xz
+
+  local -r url=https://www.torproject.org/dist/torbrowser/6.0.5/$package_name
+
+  curl -Llsso "$package_name" "$url"
+
+  tar -xvaf "$package_name" --strip 1
+
+  {
+    echo "cd $install_dir"
+    echo "./start-tor-browser.desktop"
+  } >> "$INCLUDE_UTILS_BIN_DIR/tor-browser"
+
+  chmod +x "$INCLUDE_UTILS_BIN_DIR/tor-browser"
+}
+
+main
