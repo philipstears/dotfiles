@@ -1,4 +1,9 @@
-#!/bin/sh
+#!/usr/bin/env bash
+set -eu -o pipefail
+
+declare PROG_NAME=$0
+declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
+source $DIR/../../include/utils
 
 declare active_installation=${_KERL_ACTIVE_DIR##*/}
 declare plt_name=$active_installation-base.plt

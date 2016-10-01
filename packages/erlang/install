@@ -19,13 +19,22 @@ main() {
     echo "Erlang 18.3 already built."
   else
     echo "Building Erlang 18.3..."
-    install_packages ncurses-dev
+    install_packages libssl-dev ncurses-dev
     kerl build 18.3 "$build_name"
   fi
 
-  kerl install "$build_name" "$HOME/.local/opt/erlang/$build_name"
+  if [ -d  "$HOME/.local/opt/erlang/$build_name" ]; then
+    echo "Build already installed."
+  else
+    echo "Installing build..."
+    kerl install "$build_name" "$HOME/.local/opt/erlang/$build_name"
+  fi
 
-  $DIR/base-plt
+  (
+    set +uo pipefail
+    source "$HOME/.local/opt/erlang/$build_name/activate"
+    $DIR/base-plt
+  )
 }
 
 install_kerl() {
