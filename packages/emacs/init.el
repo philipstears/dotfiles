@@ -210,7 +210,7 @@
       kept-old-versions 2
       version-control t)       ; use versioned backups
 
-(set-face-attribute 'default nil :height 200)
+(set-face-attribute 'default nil :height 150)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
