@@ -49,10 +49,12 @@
 
 ;; Themes - indoor use
 (use-package railscasts-theme :ensure t)
+(use-package hamburg-theme :ensure t)
+(use-package yoshi-theme :ensure t)
+(use-package monokai-theme :ensure t)
 
 (defun outdoors() (interactive) (load-theme 'pastelmac))
-(defun indoors() (interactive) (load-theme 'railscasts))
-
+(defun indoors() (interactive) (load-theme 'monokai))
 
 
 ;; Just why would you do anything else? :D
@@ -148,7 +150,6 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(define-key evil-normal-state-local-map (kbd "C-p") 'projectile-find-file)
 
 
 
@@ -179,7 +180,6 @@
           (neotree-find file-name))
               (message "Could not find git project root."))))
 
-(define-key evil-normal-state-local-map (kbd "C-n") 'neotree-project-dir)
 
 (add-hook 'neotree-mode-hook
           (lambda ()
@@ -219,10 +219,13 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("3b0a350918ee819dca209cec62d867678d7dac74f6195f5e3799aa206358a983" "1012cf33e0152751078e9529a915da52ec742dabf22143530e86451ae8378c1a" default))))
+    ("9d4787fa4d9e06acb0e5c51499bff7ea827983b8bcc7d7545ca41db521bd9261" "f81a9aabc6a70441e4a742dfd6d10b2bae1088830dc7aba9c9922f4b1bd2ba50" "715fdcd387af7e963abca6765bd7c2b37e76154e65401cd8d86104f22dd88404" "3b0a350918ee819dca209cec62d867678d7dac74f6195f5e3799aa206358a983" "1012cf33e0152751078e9529a915da52ec742dabf22143530e86451ae8378c1a" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(define-key evil-normal-state-map (kbd "C-p") 'projectile-find-file)
+(define-key evil-normal-state-map (kbd "C-n") 'neotree-project-dir)
