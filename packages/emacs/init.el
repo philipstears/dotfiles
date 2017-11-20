@@ -79,6 +79,10 @@
 (use-package kerl :ensure t)
 
 
+;; Gimme some Haskell!
+(use-package haskell-mode :ensure t)
+(use-package scion :ensure t)
+
 
 ;; Other packages
 (use-package cider :ensure t)
