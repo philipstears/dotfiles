@@ -27,7 +27,7 @@ main() {
     echo "Build already installed."
   else
     echo "Installing build..."
-    kerl install "$build_name" "$HOME/.local/opt/erlang/$build_name"
+    KERL_INSTALL_MANPAGES=yes kerl install "$build_name" "$HOME/.local/opt/erlang/$build_name"
   fi
 
   (
