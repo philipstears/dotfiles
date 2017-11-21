@@ -1,10 +1,9 @@
-
 ;; Get the package system setup
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
-;; (package-refresh-contents)
+;;(package-refresh-contents)
 (package-initialize)
 
 
@@ -57,6 +56,21 @@
 (defun indoors() (interactive) (load-theme 'monokai))
 
 
+;;
+;; Ensure that the background isn't set, let that come from the console
+;;
+(defun on-frame-open (frame)
+  (if (not (display-graphic-p frame))
+    (set-face-background 'default "unspecified-bg" frame)))
+
+(defun on-after-init ()
+  (on-frame-open (selected-frame)))
+
+(add-hook 'window-setup-hook 'on-after-init)
+(add-hook 'after-make-frame-functions 'on-frame-open)
+
+(on-frame-open (selected-frame))
+
 ;; Just why would you do anything else? :D
 (use-package evil
   :ensure t
@@ -67,6 +81,9 @@
   )
 
 
+;; Gimme Haskell
+(package-install 'intero)
+(add-hook 'haskell-mode-hook 'intero-mode)
 
 ;; Gimme some Erlang!
 (use-package erlang
@@ -78,6 +95,11 @@
 (use-package lfe-mode :ensure t)
 (use-package kerl :ensure t)
 
+
+;; Elm
+(use-package elm-mode :ensure t)
+(add-to-list 'company-backends 'company-elm)
+(setq elm-format-on-save t)
 
 
 ;; Other packages
@@ -219,7 +241,8 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("9d4787fa4d9e06acb0e5c51499bff7ea827983b8bcc7d7545ca41db521bd9261" "f81a9aabc6a70441e4a742dfd6d10b2bae1088830dc7aba9c9922f4b1bd2ba50" "715fdcd387af7e963abca6765bd7c2b37e76154e65401cd8d86104f22dd88404" "3b0a350918ee819dca209cec62d867678d7dac74f6195f5e3799aa206358a983" "1012cf33e0152751078e9529a915da52ec742dabf22143530e86451ae8378c1a" default))))
+    ("f78de13274781fbb6b01afd43327a4535438ebaeec91d93ebdbba1e3fba34d3c" "9d4787fa4d9e06acb0e5c51499bff7ea827983b8bcc7d7545ca41db521bd9261" "f81a9aabc6a70441e4a742dfd6d10b2bae1088830dc7aba9c9922f4b1bd2ba50" "715fdcd387af7e963abca6765bd7c2b37e76154e65401cd8d86104f22dd88404" "3b0a350918ee819dca209cec62d867678d7dac74f6195f5e3799aa206358a983" "1012cf33e0152751078e9529a915da52ec742dabf22143530e86451ae8378c1a" default)))
+ '(safe-local-variable-values (quote ((allout-layout . t)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
