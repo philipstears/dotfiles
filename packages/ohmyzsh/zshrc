@@ -50,12 +50,14 @@ INC_APPEND_HISTORY="true"
 
 source $ZSH/oh-my-zsh.sh
 
+# Does this work? SHARE_HISTORY doesn't seem to
+unsetopt share_history
+
 # Stears: colors please
 eval "$(dircolors -b)"
 
 # Stears: Hide default user prompt
 DEFAULT_USER=stears
 
-# Stears: source dot files env stuff
-# TODO: Something better than hard coding the path
-source $HOME/data/me/dotfiles/packages/env
+# Stears: source dot files env stuff (should this read the script path rather than coding it?)
+source $(dirname $(readlink $HOME/.zshrc))/../env
