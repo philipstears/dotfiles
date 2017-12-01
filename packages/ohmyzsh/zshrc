@@ -44,6 +44,19 @@ DISABLE_AUTO_TITLE="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+# Stears: source dot files env stuff (should this read the script path rather than coding it?)
+source $(dirname $(readlink $HOME/.zshrc))/../env
+
+# If "project" is available, make sure its functions are imported
+setup_project() {
+  local -r project_path=$(command -v project || return 0)
+
+  if [[ ! -z $project_path ]]; then
+    source $(dirname $(readlink $project_path))/_lib/zsh-functions/env
+  fi
+}
+setup_project
+
 # User configuration
 SHARE_HISTORY="false"
 INC_APPEND_HISTORY="true"
@@ -58,6 +71,3 @@ eval "$(dircolors -b)"
 
 # Stears: Hide default user prompt
 DEFAULT_USER=stears
-
-# Stears: source dot files env stuff (should this read the script path rather than coding it?)
-source $(dirname $(readlink $HOME/.zshrc))/../env
