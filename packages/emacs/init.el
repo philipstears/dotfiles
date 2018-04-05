@@ -3,7 +3,7 @@
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
-;;(package-refresh-contents)
+(package-refresh-contents)
 (package-initialize)
 
 
@@ -100,6 +100,27 @@
 (use-package elm-mode :ensure t)
 (add-to-list 'company-backends 'company-elm)
 (setq elm-format-on-save t)
+
+
+;; Typescript
+(use-package typescript-mode :ensure t)
+
+
+;; Rust
+(use-package rust-mode :ensure t)
+(use-package cargo :ensure t)
+(use-package toml-mode :ensure t)
+
+
+;; Multiple Major Modes for web content
+(use-package web-mode :ensure t)
+;; (use-package multi-web-mode :ensure t)
+;; (setq mweb-default-major-mode 'html-mode)
+;; (setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
+;;                   (js-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
+;;                   (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
+;; (setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
+;; (multi-web-global-mode 1)
 
 
 ;; Other packages
