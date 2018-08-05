@@ -6,7 +6,7 @@ declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
 source $DIR/../../include/utils
 
 main() {
-  local build_name="std-18-3"
+  local build_name="std-19-3"
 
   if is_command_available kerl; then
     echo "KERL already seems to be available."
@@ -16,11 +16,11 @@ main() {
   fi
 
   if (kerl list builds | grep "$build_name"); then
-    echo "Erlang 18.3 already built."
+    echo "Erlang 19.3 already built."
   else
-    echo "Building Erlang 18.3..."
+    echo "Building Erlang 19.3..."
     install_packages libssl-dev ncurses-dev
-    kerl build 18.3 "$build_name"
+    kerl build 19.3 "$build_name"
   fi
 
   if [ -d  "$HOME/.local/opt/erlang/$build_name" ]; then
