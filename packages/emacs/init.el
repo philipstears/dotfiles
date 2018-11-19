@@ -41,8 +41,6 @@
 ;; Complete Anything
 (use-package company :ensure t)
 
-
-
 ;; Themes - daylight
 (use-package pastelmac-theme :ensure t)
 
@@ -122,6 +120,16 @@
 (use-package rust-mode :ensure t)
 (use-package cargo :ensure t)
 (use-package toml-mode :ensure t)
+
+(use-package purescript-mode :ensure t)
+(use-package psc-ide :ensure t)
+
+(add-hook 'purescript-mode-hook
+          (lambda ()
+            (psc-ide-mode)
+            (company-mode)
+            ;;(flycheck-mode)
+            (turn-on-purescript-indentation)))
 
 
 ;; Multiple Major Modes for web content
@@ -275,6 +283,9 @@
  '(custom-safe-themes
    (quote
     ("a566448baba25f48e1833d86807b77876a899fc0c3d33394094cf267c970749f" "9d9fda57c476672acd8c6efeb9dc801abea906634575ad2c7688d055878e69d6" "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "8891c81848a6cf203c7ac816436ea1a859c34038c39e3cf9f48292d8b1c86528" "f78de13274781fbb6b01afd43327a4535438ebaeec91d93ebdbba1e3fba34d3c" "9d4787fa4d9e06acb0e5c51499bff7ea827983b8bcc7d7545ca41db521bd9261" "f81a9aabc6a70441e4a742dfd6d10b2bae1088830dc7aba9c9922f4b1bd2ba50" "715fdcd387af7e963abca6765bd7c2b37e76154e65401cd8d86104f22dd88404" "3b0a350918ee819dca209cec62d867678d7dac74f6195f5e3799aa206358a983" "1012cf33e0152751078e9529a915da52ec742dabf22143530e86451ae8378c1a" default)))
+ '(package-selected-packages
+   (quote
+    (zoom-frm yoshi-theme yaml-mode web-mode use-package typescript-mode toml-mode textmate terraform-mode smex scion rainbow-delimiters railscasts-theme purescript-mode psc-ide projectile pastelmac-theme neotree multi-web-mode monokai-theme magit linum-relative lfe-mode kerl intero helm-swoop hamburg-theme flx-ido evil eproject elm-mode edts editorconfig doom-themes cider cargo ag)))
  '(safe-local-variable-values (quote ((allout-layout . t)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
