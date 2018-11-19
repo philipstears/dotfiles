@@ -14,10 +14,11 @@ main = xmonad $ gnomeConfig
                 , modMask = mod4Mask
                 , startupHook = do
 
+                    startupHook gnomeConfig
+
                     -- Make Java Swing Apps work
                     setWMName "LG3D"
 
                     spawn "/bin/sh ~/.xmonad/startup-hook"
-                    startupHook gnomeConfig
                 }
 
