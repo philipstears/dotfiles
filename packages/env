@@ -1,22 +1,8 @@
-#!/usr/bin/env bash
-declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")"; pwd)
+# NOTE: this is source by the user's shell, so be as generic as possible, and don't import
+#       anything they aren't likely to want
+for package_dir in "$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")"; pwd)/"*; do
+if [[ -e "$package_dir/env" ]]; then
+source "$package_dir/env"
+fi
+done
 
-# NOTE: don't source utils or it'll end up
-#       in the user's shell, which is unlikely
-#       to be desired
-
-main() {
-  source_packages
-}
-
-source_packages() {
-  for package_dir in $DIR/*; do
-    local package_env="$package_dir/env"
-
-    if [[ -e "$package_env" ]]; then
-      source "$package_env"
-    fi
-  done
-}
-
-main

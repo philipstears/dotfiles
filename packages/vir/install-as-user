@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 set -eu -o pipefail
 
-declare PROG_NAME=$0
-declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
-source $DIR/../../include/utils
-
 main() {
-  local vir_dir=$HOME/.vir
+  local vir_dir=$HOME/.local/opt/vir
 
   if [[ -d "$vir_dir" ]]; then
     echo "vir is already installed"
@@ -15,7 +11,11 @@ main() {
     git clone https://github.com/robashton/vir.git "$vir_dir"
   fi
 
-  link_usr_bin "$vir_dir/vir" vir
+  # Make sure it's in the PATH
+  ln -fs "${vir_dir}/vir" "$HOME/.local/bin/vir"
+
+  # VIR wants ~/.vir, so just symlink it
+  ln -fs "${vir_dir}" "$HOME/.vir"
 }
 
 main

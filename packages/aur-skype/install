@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+
+declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
+
+main() {
+  local aur_root=${TARGET_USER_HOME}/.local/aur
+  local aur_dir=${aur_root}/skype
+
+  if [[ -d "${aur_dir}" ]]; then
+	su --login "${TARGET_USER}" -c "cd \"${aur_dir}\" && git pull"
+  else
+	mkdir -p "${aur_root}"
+	chown -R "${TARGET_USER}:${TARGET_USER}" "${aur_root}"
+	su --login "${TARGET_USER}" -c "git clone https://aur.archlinux.org/skypeforlinux-stable-bin.git \"${aur_dir}\""
+  fi
+}
+
+main

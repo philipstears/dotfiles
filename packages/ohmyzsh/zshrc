@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/stears/.oh-my-zsh
+export ZSH=${HOME}/.config/oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -70,4 +70,7 @@ unsetopt share_history
 eval "$(dircolors -b)"
 
 # Stears: Hide default user prompt
-DEFAULT_USER=stears
+DEFAULT_USER=${USER}
+
+# Stears: make sure ~/.local/bin is in the path
+export PATH=$PATH:$HOME/.local/bin

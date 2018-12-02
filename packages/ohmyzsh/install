@@ -1,27 +1,21 @@
 #!/usr/bin/env bash
-set -eu -o pipefail
-
-declare PROG_NAME=$0
-declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
-source $DIR/../../include/utils
+set -euo pipefail
 
 main() {
-  local install_dir=$HOME/.oh-my-zsh
-  local env_file=$DIR/../env
-
-  install_packages zsh
+  local package_dir=$(readlink --canonicalize --no-newline "$(dirname "${BASH_SOURCE[0]}")")
+  local install_dir=${TARGET_USER_HOME}/.config/oh-my-zsh
 
   if [[ ! -d "$install_dir" ]]; then
-    git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "$install_dir"
-    sudo chsh stears -s /bin/zsh
+    su --login "${TARGET_USER}" -c "git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git \"$install_dir\""
   fi
 
-  local target_path=$DIR/zshrc
-  local link_path=$HOME/.zshrc
+  local target_path=${package_dir}/zshrc
+  local link_path=${TARGET_USER_HOME}/.zshrc
 
-  if [[ ! -f "$link_path" ]] && [[ ! -L "$link_path" ]]; then
-    ln -s "$target_path" "$link_path"
-  fi
+  ln -fs "$target_path" "$link_path"
+  chown --no-dereference "$TARGET_USER:$TARGET_USER" "${link_path}"
+
+  chsh "${TARGET_USER}" -s /bin/zsh
 }
 
 main

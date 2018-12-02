@@ -1,18 +1,21 @@
 #!/usr/bin/env bash
 set -eu -o pipefail
+cd "$(dirname "${BASH_SOURCE[0]}")"
 
-declare PROG_NAME=$0
-declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
-source $DIR/../../include/utils
+declare -r ERR_ROOT=32
 
 main() {
-  ensure_not_root
-  install_packages
+	if (( ${UID} == 0 )); then
+		printf "script must be not be run as root.\n"
+		return "${ERR_ROOT}"
+	fi
+
+	install_packages
 }
 
 install_packages() {
   for package_dir in ./packages/*; do
-    local package_installer="$package_dir/install"
+    local package_installer="$package_dir/install-interactive"
 
     if [[ -x "$package_installer" ]]; then
       install_package "$package_installer"
@@ -26,4 +29,4 @@ install_package() {
   "$package_installer"
 }
 
-main
+main "${@}"

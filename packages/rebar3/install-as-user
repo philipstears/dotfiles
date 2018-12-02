@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 set -eu -o pipefail
 
-declare PROG_NAME=$0
 declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
-source $DIR/../../include/utils
 
 main() {
-  if ! is_command_available "rebar3"; then
-    cd "$(per_user_bin_dir)"
+  if ! command rebar3 2&>/dev/null; then
+    mkdir -p ".local/bin"
+    cd ".local/bin"
     wget https://s3.amazonaws.com/rebar3/rebar3
     chmod +x rebar3
     ./rebar3 update

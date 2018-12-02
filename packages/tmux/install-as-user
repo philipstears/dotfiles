@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 set -eu -o pipefail
 
-declare PROG_NAME=$0
 declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
-source $DIR/../../include/utils
 
 main() {
-  install_packages silversearcher-ag
+  ln -fs $DIR/tmux.conf "$HOME/.tmux.conf"
 }
 
 main

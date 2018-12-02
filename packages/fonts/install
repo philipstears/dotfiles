@@ -1,23 +1,21 @@
 #!/usr/bin/env bash
-set -eu -o pipefail
-
-declare PROG_NAME=$0
-declare DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
-source $DIR/../../include/utils
+set -euo pipefail
 
 main() {
-  local fonts_dir="$HOME/.local/share/fonts"
-  local powerline_font_file="$fonts_dir/Droid Sans Mono for Powerline.otf"
+  local fonts_dir="${TARGET_USER_HOME}/.local/share/fonts"
+  local powerline_font_file="${fonts_dir}/Droid Sans Mono for Powerline.otf"
 
-  mkdir -p "$fonts_dir"
+  mkdir -p "${fonts_dir}"
 
-  if [[ ! -f "$powerline_font_file" ]]; then
-    curl -Llsso "$powerline_font_file" "https://raw.githubusercontent.com/powerline/fonts/master/DroidSansMono/Droid%20Sans%20Mono%20for%20Powerline.otf"
+  if [[ ! -f "${powerline_font_file}" ]]; then
+    curl -Llsso "${powerline_font_file}" "https://raw.githubusercontent.com/powerline/fonts/master/DroidSansMono/Droid%20Sans%20Mono%20for%20Powerline.otf"
   else
-    echo "$powerline_font_file already exists, moving on..."
+    echo "${powerline_font_file} already exists, moving on..."
   fi
 
-  fc-cache -f "$fonts_dir"
+  chown "$TARGET_USER:$TARGET_USER" "${fonts_dir}"
+
+  su --login "${TARGET_USER}" -c "fc-cache -f \"${fonts_dir}\""
 }
 
 main

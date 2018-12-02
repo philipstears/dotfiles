@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+cd "$(dirname "${BASH_SOURCE[${#BASH_SOURCE[@]} - 1]}")"
+
+source ./include/utils
+
+main() {
+  ensure_not_root
+  install_base
+  install_packages
+}
+
+install_base() {
+  sudo ./base/install
+  ./base/config
+}
+
+install_packages() {
+  ./packages/install
+}
+
+main

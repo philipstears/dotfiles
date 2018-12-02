@@ -1,22 +1,119 @@
 #!/usr/bin/env bash
 set -eu -o pipefail
-cd "$(dirname "${BASH_SOURCE[${#BASH_SOURCE[@]} - 1]}")"
+cd "$(dirname "${BASH_SOURCE[0]}")"
 
-source ./include/utils
+declare -r ERR_NOT_ROOT=32
+declare -r ERR_UNKNOWN_USER=33
+
+declare -r TARGET_USER=${TARGET_USER:-${SUDO_USER:-}}
 
 main() {
-  ensure_not_root
-  install_base
-  install_packages
-}
+	if (( ${UID} != 0 )); then
+		printf "dotfiles installation must be run as root.\n"
+		return "${ERR_NOT_ROOT}"
+	fi
 
-install_base() {
-  sudo ./base/install
-  ./base/config
+	if [[ -z "${SUDO_USER}" ]]; then
+		printf "Can't find an environment variable called TARGET_USER or SUDO_USER, so I don't know which user I'm configuring.\n"
+		return "${ERR_UNKNOWN_USER}"
+	fi
+
+	install_standard_packages
+	configure_docker
+
+	# Make sure custom package scripts have access to useful things
+	export TARGET_USER
+	export TARGET_USER_HOME=$(getent passwd "${TARGET_USER}" | cut -d: -f6)
+
+	install_packages
 }
 
 install_packages() {
-  ./packages/install
+	for package_dir in ./packages/*; do
+		maybe_install_package_root "$package_dir/install"
+		maybe_install_package_as_user "$package_dir/install-as-user"
+	done
+}
+
+maybe_install_package_root() {
+	local package_installer="$1"
+
+	if [[ -x "$package_installer" ]]; then
+		printf "Installing package %s with root privileges\n" "$(dirname "${package_installer}")"
+		"$package_installer"
+	fi
+}
+
+maybe_install_package_as_user() {
+	local package_installer="$1"
+
+	if [[ -x "$package_installer" ]]; then
+		printf "Installing package %s without root privileges\n" "$(dirname "${package_installer}")"
+		su --login "${TARGET_USER}" -c "source .zshrc && $(readlink --canonicalize --no-newline "${package_installer}")"
+	fi
+}
+
+install_standard_packages() {
+	local -a standard_packages=()
+
+	standard_packages+=(base-devel)
+	standard_packages+=(linux-tools) # perf
+	standard_packages+=(git git-lfs vim)
+	standard_packages+=(zsh)
+
+	standard_packages+=(rsync)
+	standard_packages+=(terraform)
+	standard_packages+=(tmux)
+	standard_packages+=(ripgrep the_silver_searcher)
+	standard_packages+=(jq)
+	standard_packages+=(curl wget)
+	standard_packages+=(iftop iotop htop)
+	standard_packages+=(unzip)
+	standard_packages+=(strace)
+	standard_packages+=(gnupg)
+	standard_packages+=(aws-cli)
+	standard_packages+=(sl)
+
+	standard_packages+=(docker)
+
+	standard_packages+=(audacity)
+	standard_packages+=(vlc)
+	standard_packages+=(obs-studio)
+
+	# standard_packages+=(firefox-developer-edition)
+	standard_packages+=(chromium)
+
+	standard_packages+=(keepass)
+	standard_packages+=(xdotool)
+	standard_packages+=(xsel)
+
+	standard_packages+=(tcpdump)
+	standard_packages+=(wireshark-qt)
+
+	standard_packages+=(neovim)
+	standard_packages+=(ekiga)
+	standard_packages+=(electrum)
+	# standard_packages+=(code)
+	standard_packages+=(gimp)
+	standard_packages+=(libreoffice-still)
+
+	standard_packages+=(bochs)
+	standard_packages+=(dconf-editor)
+
+	# Needed for Erlang Builds
+	standard_packages+=(openssl ncurses)
+
+	pacman -S --noconfirm --needed "${standard_packages[@]}"
+}
+
+configure_docker() {
+	if [[ -z "$(getent group docker)" ]]; then
+		groupadd docker
+	fi
+
+	usermod -aG docker $TARGET_USER
+
+	systemctl enable -f docker
 }
 
 main

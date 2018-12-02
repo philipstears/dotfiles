@@ -1,0 +1,9 @@
+# I really don't want UI in my face just because I inserted a device
+gsettings set org.mate.media-handling automount-open false
+
+# Caps = Control
+gsettings set org.mate.peripherals-keyboard-xkb.kbd options "['ctrl:nocaps']"
+
+
+# The bottom panel can get lost
+gsettings set org.mate.panel toplevel-id-list "['top', 'bottom']"
