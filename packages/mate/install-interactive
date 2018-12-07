@@ -1,9 +1,9 @@
 # I really don't want UI in my face just because I inserted a device
 gsettings set org.mate.media-handling automount-open false
 
-# Caps = Control
-gsettings set org.mate.peripherals-keyboard-xkb.kbd options "['ctrl:nocaps']"
-
+# # Caps = Control
+# gsettings set org.mate.peripherals-keyboard-xkb.kbd options "['ctrl:nocaps']"
+ln -sf "$(readlink --canonicalize --no-newline "$(dirname "${BASH_SOURCE[0]}")")"/xprofile $HOME/.xprofile
 
 # The bottom panel can get lost
 gsettings set org.mate.panel toplevel-id-list "['top', 'bottom']"
