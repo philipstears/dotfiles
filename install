@@ -26,6 +26,8 @@ main() {
 	export TARGET_USER_HOME=$(getent passwd "${TARGET_USER}" | cut -d: -f6)
 
 	install_packages
+
+  printf "Finished installation\n"
 }
 
 install_packages() {
@@ -90,7 +92,7 @@ install_standard_packages() {
 	standard_packages+=(tcpdump)
 	standard_packages+=(wireshark-qt)
 
-	standard_packages+=(neovim)
+	standard_packages+=(neovim emacs)
 	standard_packages+=(ekiga)
 	standard_packages+=(electrum)
 	# standard_packages+=(code)
@@ -118,7 +120,7 @@ configure_docker() {
 		groupadd docker
 	fi
 
-	usermod -aG docker $TARGET_USER
+	usermod -aG docker "${TARGET_USER}"
 
 	systemctl enable docker
 

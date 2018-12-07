@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+main() {
+  mkdir -p ~/.emacs.d/
+  ln -sf "$(readlink --canonicalize --no-newline "$(dirname "${BASH_SOURCE[0]}")")/init.el" ~/.emacs.d/init.el
+}
+
+main

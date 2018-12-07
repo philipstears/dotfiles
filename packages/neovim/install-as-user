@@ -73,7 +73,7 @@ install_vimrc() {
 
   if [[ ! -f $vimrc_path ]]; then
     echo "installing vimrc"
-    ln -sf "$(readlink --canonicalize --no-newline "$(dirname "${BASH_SOURCE[0]}")")/vimrc" "${vimrc_path}" 
+    ln -sf "$(readlink --canonicalize --no-newline "$(dirname "${BASH_SOURCE[0]}")")/vimrc" "${vimrc_path}"
   else
     echo "vimrc already exists, skipping installation"
   fi

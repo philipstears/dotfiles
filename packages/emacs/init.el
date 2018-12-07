@@ -27,16 +27,15 @@
   (global-set-key (kbd "M-x") 'smex)
   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
   )
-(use-package zoom-frm
-  :ensure t
-  :config
-  (define-key ctl-x-map [(control ?+)] 'zoom-in/out)
-  (define-key ctl-x-map [(control ?-)] 'zoom-in/out)
-  (define-key ctl-x-map [(control ?=)] 'zoom-in/out)
-  (define-key ctl-x-map [(control ?0)] 'zoom-in/out)
-  )
 
-
+;; (use-package zoom-frm
+;;   :ensure t
+;;   :config
+;;   (define-key ctl-x-map [(control ?+)] 'zoom-in/out)
+;;   (define-key ctl-x-map [(control ?-)] 'zoom-in/out)
+;;   (define-key ctl-x-map [(control ?=)] 'zoom-in/out)
+;;   (define-key ctl-x-map [(control ?0)] 'zoom-in/out)
+;;   )
 
 ;; Complete Anything
 (use-package company :ensure t)
