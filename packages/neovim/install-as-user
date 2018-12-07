@@ -8,60 +8,34 @@ declare -ra plugins=(
   "https://github.com/othree/html5.vim"
   "https://github.com/goatslacker/mango.vim"
   "https://github.com/scrooloose/nerdtree"
-  "https://github.com/clausreinke/typescript-tools"
-  "https://github.com/leafgarland/typescript-vim"
+  #"https://github.com/clausreinke/typescript-tools"
+  #"https://github.com/leafgarland/typescript-vim"
   "https://github.com/bling/vim-airline"
 
   "https://github.com/scrooloose/syntastic"
 
-  "https://github.com/elixir-lang/vim-elixir"
-  "https://github.com/vim-erlang/vim-erlang-tags"
-  "https://github.com/vim-erlang/vim-erlang-compiler"
-  "https://github.com/vim-erlang/vim-erlang-runtime"
-  "https://github.com/vim-erlang/vim-erlang-omnicomplete"
+  # "https://github.com/elixir-lang/vim-elixir"
+  # "https://github.com/vim-erlang/vim-erlang-tags"
+  # "https://github.com/vim-erlang/vim-erlang-compiler"
+  # "https://github.com/vim-erlang/vim-erlang-runtime"
+  # "https://github.com/vim-erlang/vim-erlang-omnicomplete"
 
   "https://github.com/Matt-Deacalion/vim-systemd-syntax"
-  "https://github.com/fsharp/vim-fsharp"
+  #"https://github.com/fsharp/vim-fsharp"
   "https://github.com/tpope/vim-fugitive"
-  "https://github.com/digitaltoad/vim-jade"
+  #"https://github.com/digitaltoad/vim-jade"
   "https://github.com/pangloss/vim-javascript"
   "https://github.com/mxw/vim-jsx.git"
-  "https://github.com/groenewege/vim-less"
-  "https://github.com/ahayman/vim-nodejs-complete"
+  #"https://github.com/groenewege/vim-less"
+  #"https://github.com/ahayman/vim-nodejs-complete"
   "https://github.com/jgdavey/vim-railscasts"
-  "https://github.com/wavded/vim-stylus"
+  #"https://github.com/wavded/vim-stylus"
   "https://github.com/tpope/vim-surround"
   "https://github.com/cespare/vim-toml"
 )
 
 main() {
-	if nvim --version 2&>/dev/null; then
-		echo neovim is already installed.
-	else
-		echo neovim will be installed...
-		install
-	fi
-
-	install_plugins
-}
-
-install() {
-	local usr_src_dir="$HOME/usr/src"
-	local dir="$usr_src_dir/neovim"
-
-	mkdir -p "$usr_src_dir"
-
-	if [[ ! -d "$dir" ]]; then
-		git clone https://github.com/neovim/neovim.git -b v0.1.5 "$dir"
-	fi
-
-	cd "$dir"
-
-	sudo apt install -y libtool-bin
-
-	make
-
-	sudo make install
+  install_plugins
 }
 
 install_plugins() {
@@ -99,7 +73,7 @@ install_vimrc() {
 
   if [[ ! -f $vimrc_path ]]; then
     echo "installing vimrc"
-    curl -Llsso "$vimrc_path" https://raw.githubusercontent.com/philipstears/dotfiles/master/.vimrc
+    ln -sf "$(readlink --canonicalize --no-newline "$(dirname "${BASH_SOURCE[0]}")")/vimrc" "${vimrc_path}" 
   else
     echo "vimrc already exists, skipping installation"
   fi

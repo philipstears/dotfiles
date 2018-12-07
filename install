@@ -107,6 +107,9 @@ install_standard_packages() {
 
 	standard_packages+=(shellcheck)
 
+	# Quick Sync Things
+	standard_packages+=(libva-utils)
+
 	pacman -S --noconfirm --needed "${standard_packages[@]}"
 }
 
