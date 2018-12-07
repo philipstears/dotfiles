@@ -83,7 +83,7 @@ install_standard_packages() {
 	# standard_packages+=(firefox-developer-edition)
 	standard_packages+=(chromium)
 
-	standard_packages+=(keepass)
+	standard_packages+=(keepassxc)
 	standard_packages+=(xdotool)
 	standard_packages+=(xsel)
 
