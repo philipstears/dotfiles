@@ -74,3 +74,6 @@ eval "$(dircolors -b)"
 
 # Stears: Hide default user prompt
 DEFAULT_USER=${USER}
+
+# SSH key management
+eval "$(keychain --eval --quiet)"

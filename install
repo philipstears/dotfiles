@@ -100,8 +100,12 @@ install_standard_packages() {
 	standard_packages+=(bochs)
 	standard_packages+=(dconf-editor)
 
-	# Needed for Erlang Builds
-	standard_packages+=(openssl ncurses)
+	# Needed for Erlang Builds (old openssl is needed for OTP 19)
+	standard_packages+=(openssl openssl-1.0 ncurses)
+
+	standard_packages+=(keychain)
+
+	standard_packages+=(shellcheck)
 
 	pacman -S --noconfirm --needed "${standard_packages[@]}"
 }
