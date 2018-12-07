@@ -113,7 +113,9 @@ configure_docker() {
 
 	usermod -aG docker $TARGET_USER
 
-	systemctl enable -f docker
+	systemctl enable docker
+
+	systemctl start docker
 }
 
 main
