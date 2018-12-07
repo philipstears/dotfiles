@@ -44,6 +44,9 @@ DISABLE_AUTO_TITLE="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+# Stears: make sure ~/.local/bin is in the path
+export PATH=$PATH:$HOME/.local/bin
+
 # Stears: source dot files env stuff (should this read the script path rather than coding it?)
 source $(dirname $(readlink $HOME/.zshrc))/../env
 
@@ -71,6 +74,3 @@ eval "$(dircolors -b)"
 
 # Stears: Hide default user prompt
 DEFAULT_USER=${USER}
-
-# Stears: make sure ~/.local/bin is in the path
-export PATH=$PATH:$HOME/.local/bin
