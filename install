@@ -75,6 +75,7 @@ install_standard_packages() {
 	standard_packages+=(gnupg)
 	standard_packages+=(aws-cli)
 	standard_packages+=(sl)
+	standard_packages+=(cloc)
 
 	standard_packages+=(docker)
 
