@@ -2,6 +2,36 @@
 set -euo pipefail
 
 main() {
+
+  # Arch has emacs 26 which doesn't quite work with edts at the moment, so install 25.3
+  # from source
+  local -r emacs_version=25.3
+  mkdir -p "$HOME/src"
+
+  if ! command emacs; then
+    pushd "$HOME/src"
+
+    if [[ ! -d "$HOME/src/${emacs_version}" ]]; then
+      if [[ ! -f "emacs-${emacs_version}.tar.gz" ]]; then
+        wget "https://ftp.gnu.org/pub/gnu/emacs/emacs-${emacs_version}.tar.gz"
+      fi
+
+      tar -xaf "emacs-${emacs_version}.tar.gz"
+    fi
+
+    pushd "${emacs_version}"
+
+    ./configure
+
+    make
+
+    sudo make install
+
+    popd
+    popd
+  fi
+
+  # Make sure configuration is present
   mkdir -p ~/.emacs.d/
   ln -sf "$(readlink --canonicalize --no-newline "$(dirname "${BASH_SOURCE[0]}")")/init.el" ~/.emacs.d/init.el
 }

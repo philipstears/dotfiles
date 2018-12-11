@@ -93,7 +93,7 @@ install_standard_packages() {
 	standard_packages+=(tcpdump)
 	standard_packages+=(wireshark-qt)
 
-	standard_packages+=(neovim emacs)
+	standard_packages+=(neovim)
 	standard_packages+=(ekiga)
 	standard_packages+=(electrum)
 	# standard_packages+=(code)
