@@ -135,6 +135,7 @@ elseif !empty($userprofile)
 	cd $userprofile
 endif
 
+set termguicolors
 set guioptions-=T " No toolbar
 set guioptions-=t " No tear-off menus
 colorscheme railscasts
