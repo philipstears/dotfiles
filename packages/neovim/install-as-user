@@ -12,6 +12,8 @@ declare -ra plugins=(
   #"https://github.com/leafgarland/typescript-vim"
   "https://github.com/bling/vim-airline"
 
+  "https://github.com/elmcast/elm-vim"
+
   "https://github.com/scrooloose/syntastic"
 
   # "https://github.com/elixir-lang/vim-elixir"
